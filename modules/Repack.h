@@ -3,7 +3,7 @@
 #include <string>
 #include <regex>
 #include <fstream>
-#include "miniz.h"
+#include "Miniz.h"
 
 using namespace std;
 namespace fs = boost::filesystem;
