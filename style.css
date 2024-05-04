@@ -1,6 +1,38 @@
+* {
+    border: none;
+    outline: none;
+    color: white;
+    box-shadow: none;
+}
+window {
+    background-color: black;
+}
 #container {
     padding: 20px;
 }
+
+/* Buttons */
+button {
+    background-image: image(#2a2a2a);
+    padding: 10px;
+}
+button:hover{
+    background-image: image(#1c1c1c);
+    box-shadow: 0 0 0 2px #424242;
+}
+
+/* Entrys */
+
+entry {
+    background-image: image(#2a2a2a);
+    padding: 5px;
+}
+
+entry:focus{
+    background-image: image(#1c1c1c);
+    box-shadow: 0 0 0 2px #424242;
+}
+
 #entry_path {
-    margin-right: 2em;
+    margin-right: 0.8em;
 }

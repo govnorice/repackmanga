@@ -12,7 +12,8 @@ include_directories(${GTK_INCLUDE_DIRS})
 
 link_libraries(${GTK_LIBRARIES})
 
-configure_file("style.css" ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+# CSS
+set(STYLE_HEX_FILE "${CMAKE_CURRENT_SOURCE_DIR}/style.hex")
 
 if (Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
@@ -25,6 +26,7 @@ if (Boost_FOUND)
             modules/CssManager.h
             widgets/ChooserDialog.cpp
             widgets/ChooserDialog.h
+            "${STYLE_HEX_FILE}"
     )
     target_link_libraries(repackmanga ${Boost_LIBRARIES})
 endif ()

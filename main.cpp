@@ -7,8 +7,13 @@
 #include "modules/CssManager.h"
 #include "modules/Repack.h"
 
+// CSS
+#include "style.hex"
+
 // Widgets
 #include "widgets/ChooserDialog.h"
+
+const string homeDir = getenv("HOME");
 
 ChooserDialog chooserDialog;
 
@@ -78,11 +83,10 @@ void gui (int argc, char *argv[]) {
     //CSS
     CssManager css;
 
-    string path_css = "style.css";
-//    string path = string(homeDir) + "/.config/powerdialog/style.css";
+    string path = homeDir + "/.config/powerdialog/style.css";
 
-//    css.loadFromHex(powerdialog_style_css, powerdialog_style_css_len);
-    css.loadFromFile(path_css.c_str());
+    css.loadFromHex(repackmanga_style_css, repackmanga_style_css_len);
+    css.loadFromFile(path.c_str());
 
     gtk_widget_show_all(window);
     gtk_main();
