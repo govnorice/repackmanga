@@ -12,6 +12,8 @@ include_directories(${GTK_INCLUDE_DIRS})
 
 link_libraries(${GTK_LIBRARIES})
 
+configure_file("style.css" ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+
 if (Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
     add_executable(repackmanga main.cpp
@@ -21,6 +23,8 @@ if (Boost_FOUND)
             modules/Miniz.c
             modules/CssManager.cpp
             modules/CssManager.h
+            widgets/ChooserDialog.cpp
+            widgets/ChooserDialog.h
     )
     target_link_libraries(repackmanga ${Boost_LIBRARIES})
 endif ()

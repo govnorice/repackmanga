@@ -19,7 +19,12 @@ string ChooserDialog::run() {
     if (res == GTK_RESPONSE_ACCEPT) {
         GtkFileChooser *chooser = GTK_FILE_CHOOSER(dialog);
         path = gtk_file_chooser_get_filename(chooser);
-        cout << path << endl;
+    } else if (res == GTK_RESPONSE_CANCEL) {
+        gtk_widget_destroy(dialog);
+        throw runtime_error("The user has closed the path selection window");
+    } else {
+        gtk_widget_destroy(dialog);
+        throw runtime_error("[!] Unexpected error");
     }
 
     gtk_widget_destroy(dialog);
