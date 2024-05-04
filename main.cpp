@@ -29,6 +29,14 @@ void chooser_clicked () {
     }
 }
 
+void repack_clicked () {
+    string path = gtk_label_get_text(GTK_LABEL(label_path));
+    if (path == "The path is not chosen" || path.empty()) {
+        return;
+    }
+    Repack::start(path);
+}
+
 void gui (int argc, char *argv[]) {
     gtk_init(&argc, &argv);
 
@@ -52,13 +60,19 @@ void gui (int argc, char *argv[]) {
     GtkWidget *button_select_path = gtk_button_new_with_label("Select a path");
     gtk_widget_set_name(button_select_path, "button_select_path");
 
+    GtkWidget *button_repack = gtk_button_new_with_label("Repack");
+    gtk_widget_set_name(button_repack, "button_repack");
+
+
     gtk_container_add(GTK_CONTAINER(window), container);
     gtk_box_pack_start(GTK_BOX(container), box1, FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(container), box2, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(container), box2, TRUE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(box1), label_path, FALSE, FALSE, 0);
     gtk_box_pack_end(GTK_BOX(box1), button_select_path, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(box2), button_repack, TRUE, TRUE, 0);
 
     g_signal_connect(button_select_path, "clicked", G_CALLBACK(chooser_clicked), NULL);
+    g_signal_connect(button_repack, "clicked", G_CALLBACK(repack_clicked), NULL);
 
     //CSS
     CssManager css;
