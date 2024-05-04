@@ -15,6 +15,12 @@ https://github.com/govnorice/repackmanga/assets/80642969/29567b77-2038-438b-8be7
 ## Structure of generated directories (supported by kcc):
 ![image_tree.png](image_tree.png)
 
+## ARCH LINUX USER?
+Just install the package from the AUR, damn it!
+```
+yay -S repackmanga
+```
+
 ## HOW TO USE
 ### GUI:
 ```
