@@ -10,8 +10,16 @@ RepackManga is a tool that automates the process of organizing the directory str
 
 RepackManga - это инструмент, который автоматизирует процесс организации структуры директорий скаченной манги с веб-сайта, такого как mangalib.me. RepackManga собирает информацию о номере тома и главы из названия каждого архива, используя определенные паттерны. Затем он создает структуру директорий в соответствии с этой информацией и автоматически распаковывает главы манги в соответствующие директории
 
+https://github.com/govnorice/repackmanga/assets/80642969/29567b77-2038-438b-8be7-42cbe10b876d
+
 ## Structure of generated directories (supported by kcc):
 ![image_tree.png](image_tree.png)
+
+## I USE ARCH LINUX BTW?
+Just install the package from the AUR, damn it!
+```
+yay -S repackmanga
+```
 
 ## HOW TO USE
 ### GUI:
