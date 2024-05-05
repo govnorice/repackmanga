@@ -1,0 +1,11 @@
+{
+  "presets": [
+    {
+      "name": "mangalib_rus",
+      "pattern": {
+        "volume": "Том ([0-9]+)",
+        "chapter": "Глава ([0-9]+)"
+      }
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 // Function to extract volume name from archive name
 string Repack::extractVolume(const string& filename) {
-    regex pattern("Том ([0-9]+)");
+    regex pattern(pattern_volume.c_str());
     smatch matches; // object for storing found matches
 
     if (regex_search(filename, matches, pattern) && matches.size() > 1) {
@@ -12,28 +12,28 @@ string Repack::extractVolume(const string& filename) {
 }
 
 // Function to extract chapter number from archive name
-string Repack::extractChapter(const std::string& filename) {
-    std::regex pattern("Глава ([0-9]+)");
-    std::smatch matches; // object for storing found matches
-    if (std::regex_search(filename, matches, pattern) && matches.size() > 1) {
+string Repack::extractChapter(const string& filename) {
+    regex pattern(pattern_chapter.c_str());
+    smatch matches; // object for storing found matches
+    if (regex_search(filename, matches, pattern) && matches.size() > 1) {
         return matches[1].str();
     }
     return "";
 }
 
 // Function to unzip a file
-bool Repack::unzip(const std::string& zip_filename, const std::string& extract_dir) {
+bool Repack::unzip(const string& zip_filename, const string& extract_dir) {
     mz_zip_archive zip_archive;
     memset(&zip_archive, 0, sizeof(zip_archive));
     if (!mz_zip_reader_init_file(&zip_archive, zip_filename.c_str(), 0)) {
-        std::cerr << "Failed to open zip file: " << zip_filename << std::endl;
+        cerr << "Failed to open zip file: " << zip_filename << endl;
         return false;
     }
 
     // Get the number of files in the ZIP archive
     int num_files = mz_zip_reader_get_num_files(&zip_archive);
     if (num_files <= 0) {
-        std::cerr << "No files found in zip archive: " << zip_filename << std::endl;
+        cerr << "No files found in zip archive: " << zip_filename << endl;
         mz_zip_reader_end(&zip_archive);
         return false;
     }
@@ -42,14 +42,14 @@ bool Repack::unzip(const std::string& zip_filename, const std::string& extract_d
     for (int i = 0; i < num_files; ++i) {
         mz_zip_archive_file_stat file_stat;
         if (!mz_zip_reader_file_stat(&zip_archive, i, &file_stat)) {
-            std::cerr << "Failed to get file info from zip archive: " << zip_filename << std::endl;
+            cerr << "Failed to get file info from zip archive: " << zip_filename << endl;
             mz_zip_reader_end(&zip_archive);
             return false;
         }
 
         // Extract the file
         if (!mz_zip_reader_extract_to_file(&zip_archive, i, (extract_dir + "/" + file_stat.m_filename).c_str(), 0)) {
-            std::cerr << "Failed to extract file from zip archive: " << file_stat.m_filename << std::endl;
+            cerr << "Failed to extract file from zip archive: " << file_stat.m_filename << endl;
             mz_zip_reader_end(&zip_archive);
             return false;
         }
@@ -61,7 +61,9 @@ bool Repack::unzip(const std::string& zip_filename, const std::string& extract_d
 }
 
 // Process directory function
-void Repack::start(const std::string& directory) {
+void Repack::start(const string& directory, const string& pv, const string& pch) {
+    pattern_volume = pv;
+    pattern_chapter = pch;
     // Loop through all files with .zip extension in the current directory
     for (const auto& entry : fs::directory_iterator(directory)) {
         // Check whether the element is a regular file and whether it has a ".zip" extension.
@@ -84,12 +86,12 @@ void Repack::start(const std::string& directory) {
 
                 // Unzip the archive into the corresponding chapter directory
                 if (unzip(entry.path().string(), chapter_dir)) {
-                    std::cout << "Extraction successful for: " << entry.path().filename() << std::endl;
+                    cout << "Extraction successful for: " << entry.path().filename() << endl;
                 } else {
-                    std::cerr << "Extraction failed for: " << entry.path().filename() << std::endl;
+                    cerr << "Extraction failed for: " << entry.path().filename() << endl;
                 }
             } else {
-                std::cerr << "Failed to extract volume or chapter from filename: " << entry.path().filename() << std::endl;
+                cerr << "Failed to extract volume or chapter from filename: " << entry.path().filename() << endl;
             }
         }
     }

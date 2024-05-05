@@ -24,9 +24,13 @@ if (Boost_FOUND)
             modules/Miniz.c
             modules/CssManager.cpp
             modules/CssManager.h
+            modules/Json.hpp
             widgets/ChooserDialog.cpp
             widgets/ChooserDialog.h
+            widgets/ComboPresets.cpp
+            widgets/ComboPresets.h
             "${STYLE_HEX_FILE}"
+            presets.hex
     )
     target_link_libraries(repackmanga ${Boost_LIBRARIES})
 endif ()

@@ -10,9 +10,11 @@ namespace fs = boost::filesystem;
 
 class Repack {
 private:
-    static string extractVolume(const string& filename);
-    static string extractChapter(const std::string& filename);
-    static bool unzip(const std::string& zip_filename, const std::string& extract_dir);
+    string pattern_volume, pattern_chapter;
+
+    string extractVolume(const string& filename);
+    string extractChapter(const string& filename);
+    bool unzip(const string& zip_filename, const string& extract_dir);
 public:
-    static void start(const std::string& directory);
+    void start(const string& directory, const string& pv, const string& pch);
 };
