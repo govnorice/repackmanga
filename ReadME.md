@@ -28,5 +28,11 @@ yay -S repackmanga
 ```
 ### CLI:
 ```
-./repackmanga --path <path to the directory with archives>
+./repackmanga --path <path to the directory with archives> --preset <pattern preset>
 ```
+
+## PATTERN PRESETS:
+- mangalib_rus
+  - Support website: [mangalib.me](https://mangalib.me/)
+  - Volume pattern: "Том ([0-9]+)"
+  - Chapter pattern: "Глава ([0-9]+)"
